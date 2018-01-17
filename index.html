@@ -2,11 +2,11 @@
 <html>
   <head>
       <meta charset=utf-8 />
-      <title>Go Big Red!</title>
+      <title>Go Big Red! GL</title>
       <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
-      <script src='https://api.mapbox.com/mapbox-gl-js/v0.43.0/mapbox-gl.js'></script>
-      <link href='https://api.mapbox.com/mapbox-gl-js/v0.43.0/mapbox-gl.css' rel='stylesheet' />
+      <script src='https://api.mapbox.com/mapbox-gl-js/v0.42.0/mapbox-gl.js'></script>
+      <link href='https://api.mapbox.com/mapbox-gl-js/v0.42.0/mapbox-gl.css' rel='stylesheet' />
 
       <style>
         body { margin:0; padding:0; }
@@ -17,14 +17,31 @@
   <body>
     <div id='map'></div>
     <script>
-      L.mapbox.accessToken = 'pk.eyJ1IjoicGF1bGhlbm4iLCJhIjoiY2l1aHF3bTNuMDAwaDJvcWRyNWtsdmRzdiJ9.KNHeH6N7Mt29rey2JEhRvw';
+      mapboxgl.accessToken = 'pk.eyJ1IjoicGF1bGhlbm4iLCJhIjoiY2l1aHF3bTNuMDAwaDJvcWRyNWtsdmRzdiJ9.KNHeH6N7Mt29rey2JEhRvw';
       var map = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/mapbox/metropolis',
-        center: [-74.50, 40],
-        zoom: 9
+        style: 'mapbox://styles/paulhenn/cjbihnstp0egr2snw7f61z00u',
+        center: [-96.705592,40.820695],
+        zoom: 17
       });
-    //  var map = L.mapbox.map('map', 'metropolis').setView([40.820695, -96.705592], 18);
+      map.on('load', function() {
+        map.addLayer({
+          id: 'rpd_parks',
+          type: 'fill',
+          source: {
+            type: 'vector',
+            url: 'mapbox://mapbox.3o7ubwm8'
+          },
+          'source-layer': 'RPD_Parks',
+          layout: {
+            visibility: 'visible'
+          },
+          paint: {
+            'fill-color': 'rgba(61,153,80,0.55)'
+          }
+        });
+      });
+      //  var map = L.mapbox.map('map', 'metropolis').setView([40.820695, -96.705592], 18);
       // Use styleLayer to add a Mapbox style created in Mapbox Studio
       // L.mapbox.styleLayer('mapbox://styles/mapbox/dark-v9').addTo(map);
     </script>
